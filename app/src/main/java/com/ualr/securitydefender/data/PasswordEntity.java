@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 @Entity(tableName = "password")
 public class PasswordEntity {
+
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
     private int id;
@@ -61,6 +63,13 @@ public class PasswordEntity {
     public void setWebsite(String website) {
         this.website = website;
         websiteIconConverter(website);
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getWebsiteIconLetter() { return this.websiteIconLetter; }
