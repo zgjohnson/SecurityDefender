@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.notes.NotesFragment"
-    android:layout_marginBottom="70dp">
+    android:layout_marginBottom="50dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_recyclerview"
@@ -15,21 +15,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         android:scrollbars="vertical"
-        android:scrollingCache="true"/>
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/text_passwords"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:layout_marginEnd="8dp"-->
-    <!--        android:textAlignment="center"-->
-    <!--        android:textSize="20sp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+        android:scrollingCache="true"
+        android:layout_marginTop="?android:attr/actionBarSize"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/note_add_button"
@@ -41,5 +28,6 @@
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:layout_marginBottom="15dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

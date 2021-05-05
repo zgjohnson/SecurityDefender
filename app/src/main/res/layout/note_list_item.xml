@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/note_lyt_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="horizontal">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_baseline_sticky_note_2_24"
+        app:tint="@color/purple_200"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           app:layout_constraintStart_toEndOf="@id/image"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:layout_marginStart="10dp"
+           android:paddingTop="5dp"
+           android:paddingEnd="50dp"
+           android:paddingStart="0dp"
+           >
+           <TextView
+               android:id="@+id/note_title"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Note Title"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               android:layout_marginLeft="15dp"
+               android:layout_marginTop="5dp"
+               android:paddingTop="5dp"
+               android:textSize="18sp"/>
+
+           <TextView
+               android:layout_width="300dp"
+               android:layout_height="wrap_content"
+               android:text="@string/lorem_ipsum"
+               android:maxLines="3"
+               android:ellipsize="end"
+               app:layout_constraintStart_toStartOf="@id/note_title"
+               app:layout_constraintTop_toBottomOf="@id/note_title"
+               android:paddingEnd="30dp"
+               android:paddingStart="0dp"
+
+               android:paddingBottom="5dp"/>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/image"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
