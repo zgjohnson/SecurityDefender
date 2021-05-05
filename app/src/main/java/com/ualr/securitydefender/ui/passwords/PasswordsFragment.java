@@ -45,6 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentContainer;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -58,15 +59,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
+import com.ualr.securitydefender.databinding.FragmentPasswordsBinding;
 
 import java.util.List;
 
 public class PasswordsFragment extends Fragment {
 
+
     private PasswordsViewModel passwordsViewModel;
     private PasswordRecyclerAdapter passwordRecyclerAdapter;
     private FloatingActionButton addButton;
+
+    private FragmentPasswordsBinding mBinding;
     private NavController navController;
+    private NewPasswordFragment mFragment;
+
     public PasswordsFragment(PasswordsViewModel vm) {
         this.passwordsViewModel = vm;
     }
@@ -75,6 +82,7 @@ public class PasswordsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -126,15 +134,16 @@ public class PasswordsFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.passwords_fragment, new NewPasswordFragment(passwordsViewModel),"passwordFrag")
-                        .addToBackStack("passwordFrag")
-                        .commit();
-
-
+                    showNewPasswordDialog();
             }
         });
 
 
+    }
+
+    private void showNewPasswordDialog() {
+        FragmentManager fm = getChildFragmentManager();
+        NewPasswordFragment newPasswordFragment = new NewPasswordFragment(passwordsViewModel);
+        newPasswordFragment.show(fm, "passwordFrag");
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,7 +18,7 @@ import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
 
 
-public class NewPasswordFragment extends Fragment {
+public class NewPasswordFragment extends DialogFragment {
     private MaterialButton createPasswordButton;
     private PasswordsViewModel vm;
     private MaterialTextView newPasswordTextview;
@@ -35,6 +36,7 @@ public class NewPasswordFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogStyle);
 
     }
 

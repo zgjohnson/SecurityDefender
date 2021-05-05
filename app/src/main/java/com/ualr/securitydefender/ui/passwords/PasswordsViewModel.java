@@ -17,7 +17,7 @@ public class PasswordsViewModel extends ViewModel {
     //holds data for recyclerview
     private MediatorLiveData<List<PasswordEntity>> passwords = null;
     private MutableLiveData<String> mText;
-    private MutableLiveData<List<PasswordEntity>> passwordEntityList = null;
+    private MutableLiveData<List<PasswordEntity>> passwordEntityList = new MutableLiveData<>();
 //    private UserpassGenerator passGen = new UserpassGenerator();
     public PasswordsViewModel(@NonNull Application application) {
         super();

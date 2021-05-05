@@ -1,6 +1,7 @@
 package com.ualr.securitydefender.ui.passwords;
 
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,20 +9,17 @@ import com.google.android.material.textview.MaterialTextView;
 import com.ualr.securitydefender.R;
 
 public class PasswordViewHolder extends RecyclerView.ViewHolder {
+
     private MaterialTextView websiteIcon;
     private MaterialTextView websiteTitle;
-    private MaterialTextView usernameTitle;
-    private MaterialTextView passwordTitle;
     private MaterialTextView usernameValue;
-    private MaterialTextView passwordValue;
+    private EditText passwordValue;
 
     public PasswordViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.websiteIcon = itemView.findViewById(R.id.website_letter);
-        this.websiteTitle = itemView.findViewById(R.id.website_title);
-        this.usernameTitle = itemView.findViewById(R.id.username_title);
+        this.websiteIcon = itemView.findViewById(R.id.icon);
+        this.websiteTitle = itemView.findViewById(R.id.website_value);
         this.usernameValue = itemView.findViewById(R.id.username_value);
-        this.passwordTitle = itemView.findViewById(R.id.password_title);
         this.passwordValue = itemView.findViewById(R.id.password_value);
     }
     //SETTERS
@@ -53,19 +51,11 @@ public class PasswordViewHolder extends RecyclerView.ViewHolder {
         return websiteTitle;
     }
 
-    public MaterialTextView getUsernameTitle() {
-        return usernameTitle;
-    }
-
-    public MaterialTextView getPasswordTitle() {
-        return passwordTitle;
-    }
-
     public MaterialTextView getUsernameValue() {
         return usernameValue;
     }
 
-    public MaterialTextView getPasswordValue() {
+    public EditText getPasswordValue() {
         return passwordValue;
     }
 

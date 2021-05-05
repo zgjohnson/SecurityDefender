@@ -27,9 +27,10 @@ public class PasswordEntity {
 
     @Ignore
     private String websiteIconLetter = null;
+    private boolean selected;
 
     public PasswordEntity() {
-
+        this.selected = false;
     }
 
     @Ignore
@@ -91,4 +92,11 @@ public class PasswordEntity {
     }
 
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }
