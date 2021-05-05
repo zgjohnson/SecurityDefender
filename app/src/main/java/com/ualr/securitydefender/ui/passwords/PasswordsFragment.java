@@ -77,13 +77,12 @@ public class PasswordsFragment extends Fragment {
     public PasswordsFragment(PasswordsViewModel vm) {
         this.passwordsViewModel = vm;
     }
+
     public PasswordsFragment(){}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -92,17 +91,6 @@ public class PasswordsFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_passwords, container, false);
         passwordsViewModel = new ViewModelProvider(this).get(PasswordsViewModel.class);
-        /*
-        final TextView textView = root.findViewById(R.id.text_passwords);
-        passwordsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        */
-
-
         return root;
     }
 
@@ -110,10 +98,8 @@ public class PasswordsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         this.addButton = view.findViewById(R.id.password_add_button);
 
-        //######_  RECYCLERVIEW
         RecyclerView recyclerView = view.findViewById(R.id.passwords_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);

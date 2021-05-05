@@ -2,6 +2,7 @@ package com.ualr.securitydefender.ui.passwords;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,9 +11,9 @@ import com.ualr.securitydefender.R;
 
 public class PasswordViewHolder extends RecyclerView.ViewHolder {
 
-    private MaterialTextView websiteIcon;
-    private MaterialTextView websiteTitle;
-    private MaterialTextView usernameValue;
+    private TextView websiteIcon;
+    private TextView websiteTitle;
+    private TextView usernameValue;
     private EditText passwordValue;
 
     public PasswordViewHolder(@NonNull View itemView) {
@@ -43,15 +44,15 @@ public class PasswordViewHolder extends RecyclerView.ViewHolder {
     }
     //GETTERS
 
-    public MaterialTextView getWebsiteIcon() {
+    public TextView getWebsiteIcon() {
         return websiteIcon;
     }
 
-    public MaterialTextView getWebsiteTitle() {
+    public TextView getWebsiteTitle() {
         return websiteTitle;
     }
 
-    public MaterialTextView getUsernameValue() {
+    public TextView getUsernameValue() {
         return usernameValue;
     }
 
