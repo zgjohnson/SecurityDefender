@@ -3,6 +3,8 @@ package com.ualr.securitydefender.ui.notes;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class NotesFragment extends Fragment {
                 new ViewModelProvider(this).get(NotesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notes, container, false);
         notesViewModel = new ViewModelProvider(this).get(NotesViewModel.class);
+        setHasOptionsMenu(true);
         return root;
     }
 
@@ -76,4 +79,11 @@ public class NotesFragment extends Fragment {
         NewNoteFragment newNoteFragment = new NewNoteFragment(notesViewModel);
         newNoteFragment.show(fm, "noteFrag");
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 }

@@ -23,13 +23,7 @@ public class PasswordGeneratorFragment extends Fragment {
         passwordGeneratorViewModel =
                 new ViewModelProvider(this).get(PasswordGeneratorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_password_generator, container, false);
-        final TextView textView = root.findViewById(R.id.text_password_generator);
-        passwordGeneratorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }
