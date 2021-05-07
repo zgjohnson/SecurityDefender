@@ -15,6 +15,8 @@ public class PasswordViewHolder extends RecyclerView.ViewHolder {
     private TextView websiteTitle;
     private TextView usernameValue;
     private EditText passwordValue;
+    public View lyt_parent;
+    private PasswordRecyclerAdapter mAdapter;
 
     public PasswordViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,6 +24,15 @@ public class PasswordViewHolder extends RecyclerView.ViewHolder {
         this.websiteTitle = itemView.findViewById(R.id.website_value);
         this.usernameValue = itemView.findViewById(R.id.username_value);
         this.passwordValue = itemView.findViewById(R.id.password_value);
+        this.passwordValue.setKeyListener(null);
+        lyt_parent = itemView.findViewById(R.id.lyt_parent);
+
+        lyt_parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.getmListener().onItemClick(v, mAdapter.getPasswordEntityList().get(getLayoutPosition()), getLayoutPosition());
+            }
+        });
     }
     //SETTERS
 

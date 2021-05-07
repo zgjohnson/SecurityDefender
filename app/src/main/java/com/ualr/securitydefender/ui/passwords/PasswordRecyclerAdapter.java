@@ -12,13 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
     private List<PasswordEntity> passwordEntityList;
     private Context context;
+    private OnItemClickListener mListener;
+
+    public OnItemClickListener getmListener() {
+        return mListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view, PasswordEntity obj, int position);
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +49,7 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
 
     }
 
+
     @Override
     public int getItemCount() {
         if (this.passwordEntityList == null) {
@@ -56,6 +68,16 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
     public void addPasswordItem(int position, PasswordEntity item){
         passwordEntityList.add(position, item);
         notifyItemInserted(position);
+    }
+
+    public void clearAllSelections(){
+        for (PasswordEntity mItem: passwordEntityList) {
+            mItem.setSelected(false);
+        }
+        notifyDataSetChanged();
+    }
+    public List<PasswordEntity> getPasswordEntityList(){
+        return this.passwordEntityList;
     }
 
 }

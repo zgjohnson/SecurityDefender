@@ -69,14 +69,14 @@ import com.ualr.securitydefender.databinding.FragmentPasswordsBinding;
 
 import java.util.List;
 
-public class PasswordsFragment extends Fragment {
+public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapter.OnItemClickListener{
 
 
     private PasswordsViewModel passwordsViewModel;
     private PasswordRecyclerAdapter passwordRecyclerAdapter;
     private FloatingActionButton addButton;
 
-    private FragmentPasswordsBinding mBinding;
+
     private NavController navController;
     private NewPasswordFragment mFragment;
 
@@ -97,7 +97,7 @@ public class PasswordsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_passwords, container, false);
-        passwordsViewModel = new ViewModelProvider(requireActivity()).get(PasswordsViewModel.class);
+        passwordsViewModel = new ViewModelProvider(getActivity()).get(PasswordsViewModel.class);
         setHasOptionsMenu(true);
         return root;
     }
@@ -159,12 +159,25 @@ public class PasswordsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_note_button:
                 showEditPasswordDialog();
+            case R.id.delete_action:
+
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(View view, PasswordEntity obj, int position) {
+        passwordRecyclerAdapter.clearAllSelections();
+        obj.toggleSelection();
+        passwordRecyclerAdapter.notifyItemChanged(position);
+        passwordsViewModel.setSelectedIndex(position);
     }
 }

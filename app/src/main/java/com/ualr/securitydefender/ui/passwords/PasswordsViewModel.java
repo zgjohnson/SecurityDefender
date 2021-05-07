@@ -11,14 +11,18 @@ import androidx.lifecycle.ViewModel;
 import com.ualr.securitydefender.data.PasswordEntity;
 //import com.ualr.securitydefender.data.UserpassGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PasswordsViewModel extends ViewModel {
     //holds data for recyclerview
     private static final int NOT_SELECTED = -1;
 //    private MediatorLiveData<List<PasswordEntity>> passwords = null;
-    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>();
+//    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>();
 //    private UserpassGenerator passGen = new UserpassGenerator();
+
+    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>(new ArrayList<>());
+
     private MutableLiveData<Integer> selectedIndex = new MutableLiveData<>(NOT_SELECTED);
 
     public PasswordsViewModel(@NonNull Application application) {
@@ -29,7 +33,7 @@ public class PasswordsViewModel extends ViewModel {
     public PasswordsViewModel() {
 
 //        List<PasswordEntity> passwords = passGen.generatePasswords(5);
-        this.passwords = new MediatorLiveData<>();
+
 //        this.passwordEntityList.setValue(passwords);
 
 
@@ -52,6 +56,7 @@ public class PasswordsViewModel extends ViewModel {
     public MutableLiveData<List<PasswordEntity>> getPasswords() {
         return this.passwords;
     }
+
     public void setPasswords(List<PasswordEntity> passwordsList) {
         this.passwords.setValue(passwordsList);
     }

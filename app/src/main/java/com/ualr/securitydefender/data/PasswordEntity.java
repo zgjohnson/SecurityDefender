@@ -99,4 +99,8 @@ public class PasswordEntity {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
+    public void toggleSelection() {
+        this.selected = !this.selected;
+    }
 }

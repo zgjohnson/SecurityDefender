@@ -57,7 +57,7 @@ public class NewPasswordFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.passwordsViewModel = new ViewModelProvider(requireActivity()).get(PasswordsViewModel.class);
+        this.passwordsViewModel = new ViewModelProvider(getActivity()).get(PasswordsViewModel.class);
         this.createPasswordButton = view.findViewById(R.id.new_password_create_button);
         this.usernameEditText = view.findViewById(R.id.new_username_edittext);
         this.passwordEditText = view.findViewById(R.id.new_password_edittext);
@@ -78,8 +78,9 @@ public class NewPasswordFragment extends DialogFragment {
                 if (currentPasswordItems != null) {
                     currentPasswordItems.add(0,passwordEntity);
                 }
+
                 passwordsViewModel.setPasswords(currentPasswordItems);
-                goBack();
+                dismissFragment();
             }
         });
     }
