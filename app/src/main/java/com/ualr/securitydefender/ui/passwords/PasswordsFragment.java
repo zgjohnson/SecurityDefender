@@ -97,7 +97,7 @@ public class PasswordsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_passwords, container, false);
-        passwordsViewModel = new ViewModelProvider(this).get(PasswordsViewModel.class);
+        passwordsViewModel = new ViewModelProvider(requireActivity()).get(PasswordsViewModel.class);
         setHasOptionsMenu(true);
         return root;
     }
@@ -138,11 +138,7 @@ public class PasswordsFragment extends Fragment {
 
     }
 
-    public void onResume() {
 
-        super.onResume();
-
-    }
 
     private void showNewPasswordDialog() {
         FragmentManager fm = getChildFragmentManager();

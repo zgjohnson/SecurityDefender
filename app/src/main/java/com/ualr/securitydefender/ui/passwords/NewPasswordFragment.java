@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
@@ -21,6 +23,7 @@ import java.util.List;
 
 
 public class NewPasswordFragment extends DialogFragment {
+    private static final String PASSWORDS_LIST_FRAGMENT_TAG = "PasswordsFragment";
     private MaterialButton createPasswordButton;
     private PasswordsViewModel passwordsViewModel;
     private PasswordRecyclerAdapter mAdapter;
@@ -85,7 +88,12 @@ public class NewPasswordFragment extends DialogFragment {
         this.dismiss();
     }
     private void goBack() {
-        this.getParentFragmentManager().beginTransaction()
-                .replace(this.getId(), new PasswordsFragment(this.passwordsViewModel)).commitNow();
+//        this.getParentFragmentManager().beginTransaction()
+//                .replace(this.getId(), new PasswordsFragment(this.passwordsViewModel)).commitNow();
+
+        FragmentManager fm = getParentFragmentManager();
+        PasswordsFragment pf = new PasswordsFragment(passwordsViewModel);
+        fm.beginTransaction().show(pf).commitNow();
+
     }
 }
