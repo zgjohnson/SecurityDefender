@@ -116,10 +116,16 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
             that there's no passwords yet or something idk
             or not, not a huge deal
         */
+
+//        passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
+//        passwordRecyclerAdapter.setOnItemClickListener(this);
+//        recyclerView.setAdapter(passwordRecyclerAdapter);
+
         passwordsViewModel.getPasswords().observeForever(new Observer<List<PasswordEntity>>() {
             @Override
             public void onChanged(List<PasswordEntity> passwordEntities) {
                 passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
+                passwordRecyclerAdapter.setOnItemClickListener(this);
                 recyclerView.setAdapter(passwordRecyclerAdapter);
             }
 

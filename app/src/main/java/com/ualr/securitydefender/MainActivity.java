@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ualr.securitydefender.data.PasswordEntity;
+import com.ualr.securitydefender.ui.passwords.PasswordRecyclerAdapter;
 import com.ualr.securitydefender.ui.passwords.PasswordsFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PasswordRecyclerAdapter.OnItemClickListener {
 
 
     private FloatingActionButton mFab;
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-       
+
+
+
 
 
 
@@ -54,4 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(View view, PasswordEntity obj, int position) {
+        passwordRecyclerAdapter.clearAllSelections();
+        obj.toggleSelection();
+        passwordRecyclerAdapter.notifyItemChanged(position);
+        passwordsViewModel.setSelectedIndex(position);
+    }
 }
