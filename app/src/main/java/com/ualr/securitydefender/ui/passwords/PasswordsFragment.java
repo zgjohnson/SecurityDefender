@@ -67,6 +67,8 @@ import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
 import com.ualr.securitydefender.databinding.FragmentPasswordsBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapter.OnItemClickListener{
@@ -75,8 +77,6 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
     private PasswordsViewModel passwordsViewModel;
     private PasswordRecyclerAdapter passwordRecyclerAdapter;
     private FloatingActionButton addButton;
-
-
     private NavController navController;
     private NewPasswordFragment mFragment;
 
@@ -84,17 +84,18 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
         this.passwordsViewModel = vm;
     }
 
-    public PasswordsFragment(){}
+    public PasswordsFragment(){
+
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_passwords, container, false);
         passwordsViewModel = new ViewModelProvider(getActivity()).get(PasswordsViewModel.class);
@@ -107,9 +108,6 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
         super.onViewCreated(view, savedInstanceState);
 
         this.addButton = view.findViewById(R.id.password_add_button);
-
-
-
 
         RecyclerView recyclerView = view.findViewById(R.id.passwords_recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
@@ -138,8 +136,6 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
 
     }
 
-
-
     private void showNewPasswordDialog() {
         FragmentManager fm = getChildFragmentManager();
         NewPasswordFragment newPasswordFragment = new NewPasswordFragment(passwordsViewModel);
@@ -159,8 +155,6 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -168,13 +162,12 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
                 showEditPasswordDialog();
             case R.id.delete_action:
 
-
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onItemClick(View view, PasswordEntity obj, int position) {
+    public void onItemClick(View view, @NotNull PasswordEntity obj, int position) {
         passwordRecyclerAdapter.clearAllSelections();
         obj.toggleSelection();
         passwordRecyclerAdapter.notifyItemChanged(position);
