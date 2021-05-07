@@ -17,6 +17,7 @@ import java.util.List;
 public class PasswordsViewModel extends ViewModel {
     //holds data for recyclerview
     private static final int NOT_SELECTED = -1;
+    private int passwordIndex = NOT_SELECTED;
 //    private MediatorLiveData<List<PasswordEntity>> passwords = null;
 //    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>();
 //    private UserpassGenerator passGen = new UserpassGenerator();
@@ -27,23 +28,10 @@ public class PasswordsViewModel extends ViewModel {
 
     public PasswordsViewModel(@NonNull Application application) {
         super();
-
     }
 
-    public PasswordsViewModel() {
-
-//        List<PasswordEntity> passwords = passGen.generatePasswords(5);
-
-//        this.passwordEntityList.setValue(passwords);
-
-
-    }
-
-
-
-    public void setGeneratedPasswords() {
-
-    }
+    public PasswordsViewModel() {}
+    public void setGeneratedPasswords() {}
 
     public LiveData<Integer> getSelectedIndex() {
         return selectedIndex;
@@ -59,5 +47,14 @@ public class PasswordsViewModel extends ViewModel {
 
     public void setPasswords(List<PasswordEntity> passwordsList) {
         this.passwords.setValue(passwordsList);
+    }
+
+    public void selectPasswordAtPos(int pos) {
+        List<PasswordEntity> passwordList = passwords.getValue();
+        if (passwordIndex != NOT_SELECTED) {
+            passwordList.get(passwordIndex).setSelected(false);
+        }
+        passwordList.get(pos).setSelected(true);
+        passwords.setValue(passwordList);
     }
 }

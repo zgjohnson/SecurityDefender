@@ -1,9 +1,12 @@
 package com.ualr.securitydefender.ui.passwords;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,16 +22,12 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
     private OnItemClickListener mListener;
 
-    public OnItemClickListener getmListener() {
-        return mListener;
-    }
-
     public void setOnItemClickListener(OnItemClickListener mListener) {
         this.mListener = mListener;
     }
 
     public interface OnItemClickListener{
-        void onItemClick(View view, PasswordEntity obj, int position);
+        void onItemClick(View view, int position);
     }
     @NonNull
     @Override
@@ -41,14 +40,15 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         PasswordEntity passwordEntity = passwordEntityList.get(position);
         PasswordViewHolder passwordViewHolder = (PasswordViewHolder) holder;
-
         passwordViewHolder.setUsernameValue(passwordEntity.getUsername());
         passwordViewHolder.setPasswordValue(passwordEntity.getPassword());
         passwordViewHolder.setWebsiteName(passwordEntity.getWebsite());
         passwordViewHolder.setWebsiteIcon(passwordEntity.getWebsiteIconLetter());
-
+        // TODO
+        if (passwordEntity.isSelected()) {
+            Log.d("irconde", "replace this line with something that changes the background color of the item");
+        }
     }
-
 
     @Override
     public int getItemCount() {
@@ -57,6 +57,10 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
         } else {
             return passwordEntityList.size();
         }
+    }
+    public void updatePasswordList(List<PasswordEntity> passwords) {
+        this.passwordEntityList = passwords;
+        this.notifyDataSetChanged();
     }
 
     public PasswordRecyclerAdapter(Context context){ this.context = context;}
@@ -78,6 +82,51 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
     }
     public List<PasswordEntity> getPasswordEntityList(){
         return this.passwordEntityList;
+    }
+
+
+    class PasswordViewHolder extends RecyclerView.ViewHolder {
+        private TextView websiteIcon;
+        private TextView websiteTitle;
+        private TextView usernameValue;
+        private EditText passwordValue;
+        public View lyt_parent;
+
+        public PasswordViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.websiteIcon = itemView.findViewById(R.id.icon);
+            this.websiteTitle = itemView.findViewById(R.id.website_value);
+            this.usernameValue = itemView.findViewById(R.id.username_value);
+            this.passwordValue = itemView.findViewById(R.id.password_value);
+            this.passwordValue.setKeyListener(null);
+            lyt_parent = itemView.findViewById(R.id.lyt_parent);
+            lyt_parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(v, getLayoutPosition());
+                }
+            });
+        }
+        //SETTERS
+
+        public void setUsernameValue(String username) {
+            this.usernameValue.setText(username);
+        }
+
+        public void setPasswordValue(String password) {
+            this.passwordValue.setText(password);
+        }
+        /* Icon is from PasswordEntity's websiteIconLetter variable, which is initialized when
+         *  PasswordEntity's website String variable is set */
+        public void setWebsiteIcon(String icon) {
+            this.websiteIcon.setText(icon);
+
+        }
+
+        public void setWebsiteName(String websiteName) {
+            this.websiteTitle.setText(websiteName);
+        }
+
     }
 
 }

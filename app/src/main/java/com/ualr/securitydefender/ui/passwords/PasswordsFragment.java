@@ -117,19 +117,15 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
             or not, not a huge deal
         */
 
-//        passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
-//        passwordRecyclerAdapter.setOnItemClickListener(this);
-//        recyclerView.setAdapter(passwordRecyclerAdapter);
-
+        passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
+        passwordRecyclerAdapter.setOnItemClickListener(this);
         passwordsViewModel.getPasswords().observeForever(new Observer<List<PasswordEntity>>() {
             @Override
             public void onChanged(List<PasswordEntity> passwordEntities) {
-                passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
-                passwordRecyclerAdapter.setOnItemClickListener(this);
-                recyclerView.setAdapter(passwordRecyclerAdapter);
+                passwordRecyclerAdapter.updatePasswordList(passwordsViewModel.getPasswords().getValue());
             }
-
         });
+        recyclerView.setAdapter(passwordRecyclerAdapter);
 
         //##########_ ADD PASSWORD BUTTON
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -173,10 +169,7 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
     }
 
     @Override
-    public void onItemClick(View view, @NotNull PasswordEntity obj, int position) {
-        passwordRecyclerAdapter.clearAllSelections();
-        obj.toggleSelection();
-        passwordRecyclerAdapter.notifyItemChanged(position);
-        passwordsViewModel.setSelectedIndex(position);
+    public void onItemClick(View view, int position) {
+        passwordsViewModel.selectPasswordAtPos(position);
     }
 }
