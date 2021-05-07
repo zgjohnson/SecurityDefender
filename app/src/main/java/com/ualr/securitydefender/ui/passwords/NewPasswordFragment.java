@@ -17,10 +17,13 @@ import com.google.android.material.textview.MaterialTextView;
 import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
 
+import java.util.List;
+
 
 public class NewPasswordFragment extends DialogFragment {
     private MaterialButton createPasswordButton;
-    private PasswordsViewModel vm;
+    private PasswordsViewModel passwordsViewModel;
+    private PasswordRecyclerAdapter mAdapter;
     private MaterialTextView newPasswordTextview;
     private MaterialTextView usernameTextview;
     private MaterialTextView passwordTextview;
@@ -30,7 +33,7 @@ public class NewPasswordFragment extends DialogFragment {
     private TextInputEditText websiteEditText;
 
     public NewPasswordFragment(PasswordsViewModel vm) {
-        this.vm = vm;
+        this.passwordsViewModel = vm;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class NewPasswordFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.vm = new ViewModelProvider(requireActivity()).get(PasswordsViewModel.class);
+        this.passwordsViewModel = new ViewModelProvider(requireActivity()).get(PasswordsViewModel.class);
         this.createPasswordButton = view.findViewById(R.id.new_password_create_button);
         this.usernameEditText = view.findViewById(R.id.new_username_edittext);
         this.passwordEditText = view.findViewById(R.id.new_password_edittext);
@@ -64,14 +67,25 @@ public class NewPasswordFragment extends DialogFragment {
                 passwordEntity.setUsername(usernameEditText.getEditableText().toString());
                 passwordEntity.setPassword(passwordEditText.getEditableText().toString());
                 passwordEntity.setWebsite(websiteEditText.getEditableText().toString());
-                vm.getPasswords().getValue().add(passwordEntity);
+                passwordEntity.setSelected(false);
+
+
+
+                List<PasswordEntity> currentPasswordItems = passwordsViewModel.getPasswords().getValue();
+                if (currentPasswordItems != null) {
+                    currentPasswordItems.add(0,passwordEntity);
+                }
+                passwordsViewModel.setPasswords(currentPasswordItems);
                 goBack();
             }
         });
     }
 
+    public void dismissFragment() {
+        this.dismiss();
+    }
     private void goBack() {
         this.getParentFragmentManager().beginTransaction()
-                .replace(this.getId(), new PasswordsFragment(this.vm)).commitNow();
+                .replace(this.getId(), new PasswordsFragment(this.passwordsViewModel)).commitNow();
     }
 }

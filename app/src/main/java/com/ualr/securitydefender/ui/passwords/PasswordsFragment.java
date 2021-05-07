@@ -138,10 +138,17 @@ public class PasswordsFragment extends Fragment {
 
     }
 
+    public void onResume() {
+
+        super.onResume();
+
+    }
+
     private void showNewPasswordDialog() {
         FragmentManager fm = getChildFragmentManager();
         NewPasswordFragment newPasswordFragment = new NewPasswordFragment(passwordsViewModel);
         newPasswordFragment.show(fm, "passwordFrag");
+
     }
 
     private void showEditPasswordDialog() {

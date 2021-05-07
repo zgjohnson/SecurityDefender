@@ -53,4 +53,9 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
         this.passwordEntityList = passwords;
     }
 
+    public void addPasswordItem(int position, PasswordEntity item){
+        passwordEntityList.add(position, item);
+        notifyItemInserted(position);
+    }
+
 }
