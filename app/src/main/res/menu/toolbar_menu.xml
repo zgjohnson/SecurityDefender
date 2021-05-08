@@ -7,7 +7,7 @@
         android:title="delete"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/forward_action"
+        android:id="@+id/edit_action"
         android:title="Edit"
         app:showAsAction="never"/>
 </menu>

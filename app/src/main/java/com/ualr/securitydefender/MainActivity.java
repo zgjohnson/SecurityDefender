@@ -21,7 +21,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 
-public class MainActivity extends AppCompatActivity implements PasswordRecyclerAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
 
     private FloatingActionButton mFab;
@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements PasswordRecyclerA
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
 
-
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -47,22 +45,5 @@ public class MainActivity extends AppCompatActivity implements PasswordRecyclerA
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
-
-
-
-
-
-
-
-
-    }
-
-    @Override
-    public void onItemClick(View view, PasswordEntity obj, int position) {
-        passwordRecyclerAdapter.clearAllSelections();
-        obj.toggleSelection();
-        passwordRecyclerAdapter.notifyItemChanged(position);
-        passwordsViewModel.setSelectedIndex(position);
     }
 }

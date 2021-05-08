@@ -10,11 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.PasswordEntity;
+
+import java.util.List;
 
 public class EditPasswordFragment extends DialogFragment{
 
@@ -42,9 +45,9 @@ public class EditPasswordFragment extends DialogFragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_password_edit, container, false);
+        return inflater.inflate(R.layout.fragment_password_edit, container, false);
 
-        return view;
+
     }
 
     @Override
@@ -58,17 +61,34 @@ public class EditPasswordFragment extends DialogFragment{
         final EditText newPassword = view.findViewById(R.id.edit_password_edittext);
         final TextView currentWebsite = view.findViewById(R.id.current_website);
         final EditText newWebsite = view.findViewById(R.id.edit_website_edittext);
+        String usrname = "Current Username: " + selectedPasswordItem.getUsername();
+        String psswrd = "Current Password: " + selectedPasswordItem.getPassword();
+        String website = "Current Website: " + selectedPasswordItem.getWebsite();
 
-        currentUsername.setText(selectedPasswordItem.getUsername());
-        currentPassword.setText(selectedPasswordItem.getPassword());
-        currentWebsite.setText(selectedPasswordItem.getWebsite());
+        currentUsername.setText(usrname);
+        currentPassword.setText(psswrd);
+        currentWebsite.setText(website);
 
         Button saveBtn = view.findViewById(R.id.edit_password_button);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedPasswordItem.setUsername(newUsername.getText().toString());
+                selectedPasswordItem.setPassword(newPassword.getText().toString());
+                selectedPasswordItem.setWebsite(newWebsite.getText().toString());
+                selectedPasswordItem.setSelected(false);
+
+                List<PasswordEntity> currentPasswordItems = mPasswordViewModel.getPasswords().getValue();
+
+                mPasswordViewModel.setPasswords(currentPasswordItems);
+
+                dismissFragment();
 
             }
         });
+    }
+
+    private void dismissFragment() {
+        this.dismiss();
     }
 }
