@@ -2,6 +2,7 @@ package com.ualr.securitydefender.data;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note")
@@ -15,6 +16,20 @@ public class NoteEntity {
 
     @ColumnInfo(name = "note")
     private String note;
+
+    @Ignore
+    private boolean selected;
+
+    public NoteEntity(){
+        this.selected = false;
+    }
+
+    @Ignore
+    public NoteEntity(String title, String note){
+        this.title = title;
+        this.note = note;
+
+    }
 
     public int getId() {
         return id;
@@ -39,4 +54,17 @@ public class NoteEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public void toggleSelection() {
+        this.selected = !this.selected;
+    }
+
 }

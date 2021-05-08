@@ -72,7 +72,7 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
         this.notifyDataSetChanged();
     }
 
-    public PasswordRecyclerAdapter(Context context){ this.context = context;}
+//    public PasswordRecyclerAdapter(Context context){ this.context = context;}
     public PasswordRecyclerAdapter(Context context, List<PasswordEntity> passwords) {
         this.context = context;
         this.passwordEntityList = passwords;
@@ -96,9 +96,9 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
         }
         notifyDataSetChanged();
     }
-    public List<PasswordEntity> getPasswordEntityList(){
-        return this.passwordEntityList;
-    }
+//    public List<PasswordEntity> getPasswordEntityList(){
+//        return this.passwordEntityList;
+//    }
 
 
     class PasswordViewHolder extends RecyclerView.ViewHolder {

@@ -21,8 +21,6 @@ import java.util.List;
 
 public class EditPasswordFragment extends DialogFragment{
 
-
-
     private static final String SELECTED = "selectedPassword";
     private PasswordsViewModel mPasswordViewModel;
 

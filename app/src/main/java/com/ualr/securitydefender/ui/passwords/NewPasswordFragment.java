@@ -62,8 +62,8 @@ public class NewPasswordFragment extends DialogFragment {
         this.usernameEditText = view.findViewById(R.id.new_username_edittext);
         this.passwordEditText = view.findViewById(R.id.new_password_edittext);
         this.websiteEditText = view.findViewById(R.id.new_website_edittext);
-        this.createPasswordButton.setOnClickListener(new View.OnClickListener() {
 
+        this.createPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PasswordEntity passwordEntity = new PasswordEntity();
@@ -88,13 +88,5 @@ public class NewPasswordFragment extends DialogFragment {
     public void dismissFragment() {
         this.dismiss();
     }
-    private void goBack() {
-//        this.getParentFragmentManager().beginTransaction()
-//                .replace(this.getId(), new PasswordsFragment(this.passwordsViewModel)).commitNow();
 
-        FragmentManager fm = getParentFragmentManager();
-        PasswordsFragment pf = new PasswordsFragment(passwordsViewModel);
-        fm.beginTransaction().show(pf).commitNow();
-
-    }
 }

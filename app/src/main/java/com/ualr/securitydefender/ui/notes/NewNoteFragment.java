@@ -16,10 +16,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.ualr.securitydefender.R;
 import com.ualr.securitydefender.data.NoteEntity;
 
+import java.util.List;
+
 public class NewNoteFragment extends DialogFragment {
+
     private Button createNoteButton;
     private NotesViewModel vm;
-    private TextInputEditText noteTitleEditText;
+    private EditText noteTitleEditText;
     private EditText noteInfoEditText;
 
     public NewNoteFragment(NotesViewModel vm){
@@ -42,10 +45,10 @@ public class NewNoteFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.vm = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
+        this.vm = new ViewModelProvider(getActivity()).get(NotesViewModel.class);
         this.createNoteButton = view.findViewById(R.id.new_note_create_button);
-        this.noteTitleEditText = view.findViewById(R.id.note_title);
-        this.noteInfoEditText = view.findViewById(R.id.note_info);
+        this.noteTitleEditText = view.findViewById(R.id.new_note_title);
+        this.noteInfoEditText = view.findViewById(R.id.new_note_info);
 
         this.createNoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +56,21 @@ public class NewNoteFragment extends DialogFragment {
                 NoteEntity noteEntity = new NoteEntity();
                 noteEntity.setTitle(noteTitleEditText.getEditableText().toString());
                 noteEntity.setNote(noteInfoEditText.getEditableText().toString());
-                vm.getNotes().getValue().add(noteEntity);
-                goBack();
+                noteEntity.setSelected(false);
+
+                List<NoteEntity> currentNoteItems = vm.getNotes().getValue();
+                if (currentNoteItems != null) {
+                    currentNoteItems.add(0,noteEntity);
+                }
+                vm.setNotes(currentNoteItems);
+                dismissFragment();
             }
         });
     }
 
-    private void goBack() {
-        this.getParentFragmentManager().beginTransaction().replace(this.getId(), new NotesFragment()).commitNow();
+    private void dismissFragment() {
+        this.dismiss();
     }
+
+
 }

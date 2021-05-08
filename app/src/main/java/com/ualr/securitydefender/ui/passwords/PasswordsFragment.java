@@ -71,14 +71,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PasswordsFragment extends Fragment implements com.ualr.securitydefender.ui.passwords.PasswordRecyclerAdapter.OnItemClickListener{
+public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapter.OnItemClickListener{
 
 
     private PasswordsViewModel passwordsViewModel;
     private com.ualr.securitydefender.ui.passwords.PasswordRecyclerAdapter passwordRecyclerAdapter;
     private FloatingActionButton addButton;
-    private NavController navController;
-    private NewPasswordFragment mFragment;
+
 
     public PasswordsFragment(PasswordsViewModel vm) {
         this.passwordsViewModel = vm;
@@ -117,7 +116,7 @@ public class PasswordsFragment extends Fragment implements com.ualr.securitydefe
             or not, not a huge deal
         */
 
-        passwordRecyclerAdapter = new com.ualr.securitydefender.ui.passwords.PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
+        passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
         passwordRecyclerAdapter.setOnItemClickListener(this);
         passwordsViewModel.getPasswords().observeForever(new Observer<List<PasswordEntity>>() {
             @Override
@@ -152,12 +151,6 @@ public class PasswordsFragment extends Fragment implements com.ualr.securitydefe
 //        passwordRecyclerAdapter.clearAllSelections();
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
     public void removePasswordItem(){
         int currentPassword = passwordsViewModel.getSelectedIndex().getValue();
         List<PasswordEntity> current = passwordsViewModel.getPasswords().getValue();
@@ -166,6 +159,14 @@ public class PasswordsFragment extends Fragment implements com.ualr.securitydefe
             passwordRecyclerAdapter.removePassword(currentPassword);
         }
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

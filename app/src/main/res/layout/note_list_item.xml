@@ -45,6 +45,7 @@
                android:textSize="18sp"/>
 
            <TextView
+               android:id="@+id/note_info"
                android:layout_width="300dp"
                android:layout_height="wrap_content"
                android:text="@string/lorem_ipsum"
