@@ -34,10 +34,11 @@ public class PasswordEntity {
     }
 
     @Ignore
-    public PasswordEntity(String username, String password, String website) {
+    public PasswordEntity(String username, String password, String website, boolean selected) {
         this.username = username;
         this.password = password;
         this.website = website;
+        this.selected = selected;
         websiteIconConverter(website);
     }
 

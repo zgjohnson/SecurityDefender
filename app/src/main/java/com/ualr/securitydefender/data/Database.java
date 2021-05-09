@@ -7,12 +7,15 @@ import androidx.room.RoomDatabase;
 @androidx.room.Database(version = 1, entities = {PasswordEntity.class, NoteEntity.class}, exportSchema = false)
 public abstract class Database extends RoomDatabase {
     private static Database database;
-    public static Database getDatabase(Context context) {
+    public abstract PasswordDAO passwordDAO();
+    public abstract NoteDAO noteDAO();
+    public static synchronized Database getDatabase(Context context) {
       if (database == null){
-          database = Room.databaseBuilder(context.getApplicationContext(), Database.class, "Application Database").build();
+          database = Room.databaseBuilder(context.getApplicationContext(), Database.class, "Application Database").fallbackToDestructiveMigration().build();
         }
       return database;
     }
+
     public static void deleteDatabase(){
         database = null;
     }

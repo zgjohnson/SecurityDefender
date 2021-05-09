@@ -2,6 +2,7 @@ package com.ualr.securitydefender.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -27,7 +28,7 @@ public interface PasswordDAO {
     @Query("DELETE FROM password")
     void deleteAll();
 
-    @Query("DELETE FROM password WHERE id = :id")
-    void deletePassword(int id);
+    @Delete
+    void deletePassword(PasswordEntity passwordEntity);
 }
 

@@ -1,7 +1,9 @@
 package com.ualr.securitydefender.data;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -27,6 +29,6 @@ public interface NoteDAO {
     @Query("DELETE FROM note")
     void deleteAll();
 
-    @Query("DELETE FROM note WHERE id = :id")
-    void deleteNote(int id);
+    @Delete
+    void deleteNote(NoteEntity noteEntity);
 }

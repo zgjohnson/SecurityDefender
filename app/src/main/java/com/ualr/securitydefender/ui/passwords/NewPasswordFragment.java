@@ -66,11 +66,12 @@ public class NewPasswordFragment extends DialogFragment {
         this.createPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PasswordEntity passwordEntity = new PasswordEntity();
-                passwordEntity.setUsername(usernameEditText.getEditableText().toString());
-                passwordEntity.setPassword(passwordEditText.getEditableText().toString());
-                passwordEntity.setWebsite(websiteEditText.getEditableText().toString());
-                passwordEntity.setSelected(false);
+                String username = usernameEditText.getEditableText().toString();
+                String password = passwordEditText.getEditableText().toString();
+                String website = websiteEditText.getEditableText().toString();
+                boolean selected = false;
+                PasswordEntity passwordEntity = new PasswordEntity(username,password,website,selected);
+
 
 
 

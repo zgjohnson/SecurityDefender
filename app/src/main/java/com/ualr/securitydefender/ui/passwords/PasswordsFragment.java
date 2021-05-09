@@ -61,9 +61,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ualr.securitydefender.R;
+import com.ualr.securitydefender.data.Database;
+import com.ualr.securitydefender.data.PasswordDAO;
 import com.ualr.securitydefender.data.PasswordEntity;
 import com.ualr.securitydefender.databinding.FragmentPasswordsBinding;
 
@@ -77,7 +80,6 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
     private PasswordsViewModel passwordsViewModel;
     private com.ualr.securitydefender.ui.passwords.PasswordRecyclerAdapter passwordRecyclerAdapter;
     private FloatingActionButton addButton;
-
 
     public PasswordsFragment(PasswordsViewModel vm) {
         this.passwordsViewModel = vm;
