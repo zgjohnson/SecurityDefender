@@ -30,14 +30,14 @@ public class PasswordsViewModel extends ViewModel {
 //    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>();
 //    private UserpassGenerator passGen = new UserpassGenerator();
 
-    private MutableLiveData<List<PasswordEntity>> passwords = new MutableLiveData<>(new ArrayList<>());
+    private LiveData<List<PasswordEntity>> passwords = new MutableLiveData<>(new ArrayList<>());
 
     private MutableLiveData<Integer> selectedIndex = new MutableLiveData<>(NOT_SELECTED);
 
     public PasswordsViewModel(@NonNull Application application) {
         super();
-        //repository = new Repository(application);
-        //passwords = repository.getAllPasswords();
+        repository = new Repository(application);
+        passwords = repository.getAllPasswords();
     }
 
     public PasswordsViewModel() {}

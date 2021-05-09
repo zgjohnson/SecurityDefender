@@ -78,8 +78,8 @@ public class EditPasswordFragment extends DialogFragment{
 
                 List<PasswordEntity> currentPasswordItems = mPasswordViewModel.getPasswords().getValue();
 
-                mPasswordViewModel.setPasswords(currentPasswordItems);
-                //mPasswordViewModel.update(selectedPasswordItem);
+                //mPasswordViewModel.setPasswords(currentPasswordItems);
+                mPasswordViewModel.update(selectedPasswordItem);
                 dismissFragment();
 
             }
