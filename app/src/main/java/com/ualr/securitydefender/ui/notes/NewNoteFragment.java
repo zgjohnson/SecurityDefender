@@ -58,11 +58,12 @@ public class NewNoteFragment extends DialogFragment {
                 noteEntity.setNote(noteInfoEditText.getEditableText().toString());
                 noteEntity.setSelected(false);
 
-                List<NoteEntity> currentNoteItems = vm.getNotes().getValue();
-                if (currentNoteItems != null) {
-                    currentNoteItems.add(0,noteEntity);
-                }
-                vm.setNotes(currentNoteItems);
+//                List<NoteEntity> currentNoteItems = vm.getNotes().getValue();
+//                if (currentNoteItems != null) {
+//                    currentNoteItems.add(0,noteEntity);
+//                }
+//                vm.setNotes(currentNoteItems);
+                vm.insert(noteEntity);
                 dismissFragment();
             }
         });

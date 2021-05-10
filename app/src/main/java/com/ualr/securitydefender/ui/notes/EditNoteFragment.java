@@ -64,7 +64,8 @@ public class EditNoteFragment extends DialogFragment {
                 selectedNoteItem.setSelected(false);
 
                 List<NoteEntity> currentNoteItems = mNoteViewModel.getNotes().getValue();
-                mNoteViewModel.setNotes(currentNoteItems);
+                //mNoteViewModel.setNotes(currentNoteItems);
+                mNoteViewModel.update(selectedNoteItem);
                 dismissFragment();
 
             }

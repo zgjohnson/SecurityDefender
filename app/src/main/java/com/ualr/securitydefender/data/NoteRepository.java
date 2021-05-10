@@ -8,11 +8,12 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class NoteRepository {
-    private static Database database;
+    
     private NoteDAO noteDAO;
     private LiveData<List<NoteEntity>> allNotes;
 
     public NoteRepository (Application application) {
+        Database database = Database.getDatabase(application);
         noteDAO = database.noteDAO();
         allNotes = noteDAO.getAllNotes();
 

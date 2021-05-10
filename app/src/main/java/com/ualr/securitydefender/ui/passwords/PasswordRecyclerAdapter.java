@@ -123,7 +123,7 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
                 }
             });
         }
-        //SETTERS
+
 
         public void setUsernameValue(String username) {
             this.usernameValue.setText(username);
@@ -132,8 +132,7 @@ public class PasswordRecyclerAdapter extends RecyclerView.Adapter {
         public void setPasswordValue(String password) {
             this.passwordValue.setText(password);
         }
-        /* Icon is from PasswordEntity's websiteIconLetter variable, which is initialized when
-         *  PasswordEntity's website String variable is set */
+
         public void setWebsiteIcon(String icon) {
             this.websiteIcon.setText(icon);
 
