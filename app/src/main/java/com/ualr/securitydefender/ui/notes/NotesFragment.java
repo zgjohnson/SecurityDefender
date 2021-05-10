@@ -46,6 +46,8 @@ public class NotesFragment extends Fragment implements NoteRecyclerAdapter.OnIte
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notes, container, false);
         notesViewModel = new ViewModelProvider(getActivity()).get(NotesViewModel.class);
+        //Maybe change this to onViewCreated
+        notesViewModel.setNoteRepository(this.getActivity().getApplication());
         setHasOptionsMenu(true);
         return root;
     }
@@ -62,10 +64,11 @@ public class NotesFragment extends Fragment implements NoteRecyclerAdapter.OnIte
 
         noteRecyclerAdapter = new NoteRecyclerAdapter(getContext(), notesViewModel.getNotes().getValue());
         noteRecyclerAdapter.setOnItemClickListener(this);
-        notesViewModel.getNotes().observeForever(new Observer<List<NoteEntity>>() {
+        //observe
+        notesViewModel.getNotes().observe(getViewLifecycleOwner(), new Observer<List<NoteEntity>>() {
             @Override
-            public void onChanged(List<NoteEntity> noteEntities) {
-                noteRecyclerAdapter.updateNoteList(notesViewModel.getNotes().getValue());
+            public void onChanged(@Nullable List<NoteEntity> noteEntities) {
+                noteRecyclerAdapter.updateNoteList(noteEntities);
             }
         });
         recyclerView.setAdapter(noteRecyclerAdapter);
@@ -92,10 +95,14 @@ public class NotesFragment extends Fragment implements NoteRecyclerAdapter.OnIte
 
     public void removeNoteItem(){
         int currentNote = notesViewModel.getSelectedIndex().getValue();
+
         List<NoteEntity> current = notesViewModel.getNotes().getValue();
 
+        NoteEntity noteEntity = current.get(currentNote);
+
         if (currentNote != -1 && current != null){
-            noteRecyclerAdapter.removeNote(currentNote);
+            //noteRecyclerAdapter.removeNote(currentNote);
+            notesViewModel.delete(noteEntity);
         }
     }
 

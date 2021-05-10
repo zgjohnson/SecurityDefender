@@ -10,10 +10,10 @@ public abstract class Database extends RoomDatabase {
     public abstract PasswordDAO passwordDAO();
     public abstract NoteDAO noteDAO();
     public static synchronized Database getDatabase(Context context) {
-      if (database == null){
-          database = Room.databaseBuilder(context.getApplicationContext(), Database.class, "Application Database").fallbackToDestructiveMigration().build();
+        if (database == null){
+            database = Room.databaseBuilder(context.getApplicationContext(), Database.class, "Application Database").fallbackToDestructiveMigration().build();
         }
-      return database;
+        return database;
     }
 
     public static void deleteDatabase(){

@@ -100,6 +100,8 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
 
         View root = inflater.inflate(R.layout.fragment_passwords, container, false);
         passwordsViewModel = new ViewModelProvider(getActivity()).get(PasswordsViewModel.class);
+        //added
+        passwordsViewModel.setPasswordRepository(this.getActivity().getApplication());
         setHasOptionsMenu(true);
         return root;
     }
@@ -120,15 +122,16 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
 
         passwordRecyclerAdapter = new PasswordRecyclerAdapter(getContext(), passwordsViewModel.getPasswords().getValue());
         passwordRecyclerAdapter.setOnItemClickListener(this);
-        passwordsViewModel.getPasswords().observeForever(new Observer<List<PasswordEntity>>() {
+        //recyclerView.setAdapter(passwordRecyclerAdapter);
+        passwordsViewModel.getPasswords().observe(getViewLifecycleOwner(), new Observer<List<PasswordEntity>>() {
             @Override
-            public void onChanged(List<PasswordEntity> passwordEntities) {
-                passwordRecyclerAdapter.updatePasswordList(passwordsViewModel.getPasswords().getValue());
+            public void onChanged(@Nullable List<PasswordEntity> passwordEntities) {
+                passwordRecyclerAdapter.updatePasswordList(passwordEntities);
             }
         });
         recyclerView.setAdapter(passwordRecyclerAdapter);
 
-        //##########_ ADD PASSWORD BUTTON
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,11 +158,17 @@ public class PasswordsFragment extends Fragment implements PasswordRecyclerAdapt
 
     public void removePasswordItem(){
         int currentPassword = passwordsViewModel.getSelectedIndex().getValue();
+
         List<PasswordEntity> current = passwordsViewModel.getPasswords().getValue();
 
+        PasswordEntity passwordEntity = current.get(currentPassword);
+
         if (currentPassword != -1 && current != null){
-            passwordRecyclerAdapter.removePassword(currentPassword);
+//            passwordRecyclerAdapter.removePassword(currentPassword);
+            passwordsViewModel.delete(passwordEntity);
         }
+
+
     }
 
     @Override

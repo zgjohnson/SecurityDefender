@@ -80,7 +80,8 @@ public class NewPasswordFragment extends DialogFragment {
                     currentPasswordItems.add(0,passwordEntity);
                 }
 
-                passwordsViewModel.setPasswords(currentPasswordItems);
+                //passwordsViewModel.setPasswords(currentPasswordItems);
+                passwordsViewModel.insert(passwordEntity);
                 dismissFragment();
             }
         });

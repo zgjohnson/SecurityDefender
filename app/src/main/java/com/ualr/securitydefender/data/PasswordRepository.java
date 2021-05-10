@@ -7,17 +7,17 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class Repository {
+public class PasswordRepository {
     private PasswordDAO passwordDAO;
-    private NoteDAO noteDAO;
-    private LiveData<List<PasswordEntity>> allPasswords;
-    private LiveData<List<NoteEntity>> allNotes;
 
-    public Repository(Application application) {
+    private LiveData<List<PasswordEntity>> allPasswords;
+
+
+    public PasswordRepository(Application application) {
         Database database = Database.getDatabase(application);
-        noteDAO = database.noteDAO();
+
         passwordDAO = database.passwordDAO();
-        allNotes = noteDAO.getAllNotes();
+
         allPasswords = passwordDAO.getAllPasswords();
     }
 
@@ -80,61 +80,5 @@ public class Repository {
         }
     }
 
-    public void addNote(NoteEntity noteEntity){
-        new InsertNoteAsyncTask(noteDAO).execute(noteEntity);
-
-    }
-    public void updateNote(NoteEntity noteEntity){
-        new UpdateNoteAsyncTask(noteDAO).execute(noteEntity);
-
-    }
-    public void deleteNote(NoteEntity noteEntity){
-        new DeleteNoteAsyncTask(noteDAO).execute(noteEntity);
-
-    }
-
-    public LiveData<List<NoteEntity>> getAllNotes(){
-        return allNotes;
-    }
-
-    private static class InsertNoteAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
-        private NoteDAO noteDAO;
-
-        private InsertNoteAsyncTask(NoteDAO noteDAO){
-            this.noteDAO = noteDAO;
-        }
-
-        @Override
-        protected Void doInBackground(NoteEntity... noteEntities) {
-            noteDAO.addNote(noteEntities[0]);
-            return null;
-        }
-    }
-    private static class UpdateNoteAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
-        private NoteDAO noteDAO;
-
-        private UpdateNoteAsyncTask(NoteDAO noteDAO){
-            this.noteDAO = noteDAO;
-        }
-
-        @Override
-        protected Void doInBackground(NoteEntity... noteEntities) {
-            noteDAO.addNote(noteEntities[0]);
-            return null;
-        }
-    }
-    private static class DeleteNoteAsyncTask extends AsyncTask<NoteEntity, Void, Void> {
-        private NoteDAO noteDAO;
-
-        private DeleteNoteAsyncTask(NoteDAO noteDAO){
-            this.noteDAO = noteDAO;
-        }
-
-        @Override
-        protected Void doInBackground(NoteEntity... noteEntities) {
-            noteDAO.addNote(noteEntities[0]);
-            return null;
-        }
-    }
 
 }
